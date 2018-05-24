@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 set -euf
 
-CWD="$(cd $(dirname "$0"); pwd)"
+SOURCE="${BASH_SOURCE[0]}"
+
+while [ -h "$SOURCE" ]; do
+  CWD="$(cd $(dirname "$SOURCE"); pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$CWD/$SOURCE"
+done
+
+CWD="$(cd $(dirname "$SOURCE"); pwd)"
 clj -i $CWD/cq.clj -m cq "$@"
