@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euf
+
+CWD="$(cd $(dirname "$0"); pwd)"
+clj -i $CWD/cq.clj -m cq "$@"
