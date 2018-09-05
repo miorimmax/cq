@@ -4,7 +4,21 @@
 
 ## Requirements
 
-You will need Clojure 1.9 with `clj`. See [the Clojure documentation](https://clojure.org/guides/deps_and_cli) for details.
+You will need Clojure 1.9 with `clj`. On a macOS, you can install it with brew:
+
+```
+brew install clojure
+```
+
+See [the Clojure documentation](https://clojure.org/guides/deps_and_cli) for details.
+
+## Installation
+
+Clone this repository and create a symbolic link of `cq` somewhere in your `$PATH`, for example:
+
+```bash
+ln -sv cq /usr/local/bin/cq
+```
 
 ## Usage
 
@@ -22,7 +36,6 @@ cq ':a-key' < file.edn
 
 ### Providing a custom data reader
 
-```bash
-# Takes the input of #string tag and applies the function (partial str) on it
-cq --data-reader '[string (partial str)]' < file.edn
-```
+Edit `cq.clj` and change the `default-reader-fn` implementation.
+
+You can also extend the map passed to `edn/read` to add more custom readers.
