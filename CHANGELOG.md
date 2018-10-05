@@ -6,6 +6,7 @@
 
 ### Added
 * Option to define the default reader fn from the CLI arguments.
+* Option to colorize the output.
 
 ## [0.2.0] - 2018-10-05
 ### Changed

@@ -3,13 +3,15 @@
   (:require [clojure.tools.cli :refer [parse-opts]]
             [clojure.pprint :refer [pprint]]
             [clojure.string :as string]
-            [clojure.edn :as edn]))
+            [clojure.edn :as edn]
+            [puget.printer :as puget]))
 
 (def ^:private cli-options
   [["-d" "--default-reader-fn EXPR" "Default reader fn"
     :default      (fn [tag input] (format "#%s %s" tag input))
     :default-desc "Print tag and input values without further evaluation"
     :parse-fn     (fn [input] (eval (read-string input)))]
+   ["-c" "--colors" "Colorize the output"]
    ["-h" "--help"]])
 
 (defn- show-usage [options]
@@ -40,11 +42,12 @@
   (System/exit status))
 
 (defn- eval! [expr options]
-  (let [data (edn/read {:default (:default-reader-fn options)} *in*)
-        f    (some->> expr str read-string eval)]
-    (if f
-      (pprint (f data))
-      (pprint data))))
+  (let [data    (edn/read {:default (:default-reader-fn options)} *in*)
+        expr-fn (or (some->> expr read-string eval)
+                    identity)]
+    (puget/with-options
+      {:print-color (:colors options)}
+      (puget/pprint (expr-fn data)))))
 
 (defn -main [& args]
   (let [{:keys [expr options exit-status exit-message]} (validate-args args)]
