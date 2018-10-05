@@ -5,11 +5,12 @@
             [clojure.string :as string]
             [clojure.edn :as edn]))
 
-(defn default-reader-fn [tag input]
-  (format "#%s %s" tag input))
-
 (def ^:private cli-options
-  [["-h" "--help"]])
+  [["-d" "--default-reader-fn EXPR" "Default reader fn"
+    :default      (fn [tag input] (format "#%s %s" tag input))
+    :default-desc "Print tag and input values without further evaluation"
+    :parse-fn     (fn [input] (eval (read-string input)))]
+   ["-h" "--help"]])
 
 (defn- show-usage [options]
   (->> ["Usage: cq [options] [expr]"
@@ -38,8 +39,8 @@
   (println message)
   (System/exit status))
 
-(defn- eval! [expr]
-  (let [data (edn/read {:default default-reader-fn} *in*)
+(defn- eval! [expr options]
+  (let [data (edn/read {:default (:default-reader-fn options)} *in*)
         f    (some->> expr str read-string eval)]
     (if f
       (pprint (f data))
@@ -49,4 +50,4 @@
   (let [{:keys [expr options exit-status exit-message]} (validate-args args)]
     (if exit-message
       (exit! (or exit-status 0) exit-message)
-      (eval! expr))))
+      (eval! expr options))))

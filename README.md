@@ -39,8 +39,10 @@ cq '#(-> % :deep :nested :key)' < file.edn
 cq ':a-key' < file.edn
 ```
 
-### Providing a custom data reader
+### Providing a custom default data reader
 
-Edit `cq.clj` and change the `default-reader-fn` implementation.
+You can provide a custom default data reader with the `--default-reader-fn` (or `-d`, for short) option. For example:
 
-You can also extend the map passed to `edn/read` to add more custom readers.
+```bash
+cq --default-reader-fn '(fn [tag input] (format "Custom reader: tag %s, input %s" tag input))'
+```
