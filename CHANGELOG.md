@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [Unreleased]
+### Changed
+* Command line arguments are parsed with tools.cli now.
+
 ## [0.2.0] - 2018-10-05
 ### Changed
 * Replaced launch script in favor of native image built with GraalVM.
