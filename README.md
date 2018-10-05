@@ -2,7 +2,8 @@
 
 `cq` provides the same functionality `jq` does for JSON, allowing one to interact with EDN files by performing queries and manipulating input/output as necessary.
 
-## Requirements
+## Developing
+### Requirements
 
 You will need Clojure 1.9 with `clj`. On a macOS, you can install it with brew:
 
@@ -12,13 +13,17 @@ brew install clojure
 
 See [the Clojure documentation](https://clojure.org/guides/deps_and_cli) for details.
 
-## Installation
+And you will also need GraalVM, see [its documentation](https://www.graalvm.org/docs/getting-started/#install-graalvm) for details.
 
-Clone this repository and create a symbolic link of `cq` somewhere in your `$PATH`, for example:
+### Building
+
+Clone this repository and run the `:native-image` alias to build the native binary:
 
 ```bash
-ln -sv cq /usr/local/bin/cq
+clojure -A:native-image
 ```
+
+Then, copy it to a location in your `$PATH`.
 
 ## Usage
 

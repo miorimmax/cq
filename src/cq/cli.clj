@@ -1,4 +1,5 @@
-(ns cq
+(ns cq.cli
+  (:gen-class)
   (:require [clojure.pprint :refer [pprint]]
             [clojure.edn :as edn]))
 
