@@ -52,5 +52,5 @@
 (defn -main [& args]
   (let [{:keys [expr options exit-status exit-message]} (validate-args args)]
     (if exit-message
-      (exit! (or exit-status 0) exit-message)
+      (exit! (or exit-status 1) exit-message)
       (eval! expr options))))
