@@ -3,6 +3,7 @@
 `cq` provides the same functionality `jq` does for JSON, allowing one to interact with EDN files by performing queries and manipulating input/output as necessary.
 
 ## Developing
+
 ### Requirements
 
 You will need Clojure 1.9 with `clj`. On a macOS, you can install it with brew:
@@ -13,17 +14,19 @@ brew install clojure
 
 See [the Clojure documentation](https://clojure.org/guides/deps_and_cli) for details.
 
-And you will also need GraalVM, see [its documentation](https://www.graalvm.org/docs/getting-started/#install-graalvm) for details.
-
 ### Building
 
-Clone this repository and run the `:native-image` alias to build the native binary:
+Clone this repository and run the `:uberjar` alias to build the native binary:
 
 ```bash
-clojure -A:native-image
+clojure -A:uberjar
 ```
 
-Then, copy it to a location in your `$PATH`.
+Then, make a symlink to `bin/cq` in a location in your `$PATH`, for example:
+
+```bash
+ln -sv $(pwd -P)/bin/cq /usr/local/bin
+```
 
 ## Usage
 
@@ -45,4 +48,14 @@ You can provide a custom default data reader with the `--default-reader-fn` (or 
 
 ```bash
 cq --default-reader-fn '(fn [tag input] (format "Custom reader: tag %s, input %s" tag input))'
+```
+
+### Faster startup time
+
+You can use something like [drip](https://github.com/ninjudd/drip) to speed up the JVM startup time.
+
+After installing it, you can export `$CQ_JAVA_CMD` using `drip` and `cq` will use it automatically:
+
+```bash
+export CQ_JAVA_CMD=/usr/local/bin/drip
 ```

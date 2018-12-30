@@ -9,6 +9,9 @@
 * Option to define the default reader fn from the CLI arguments.
 * Option to colorize the output.
 
+### Removed
+* Native image is no longer used because GraalVM [does not support dynamic class loading](https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md#dynamic-class-loading--unloading) and Clojure's `eval` depends on it.
+
 ## [0.2.0] - 2018-10-05
 ### Changed
 * Replaced launch script in favor of native image built with GraalVM.
