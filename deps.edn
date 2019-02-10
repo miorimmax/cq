@@ -1,5 +1,0 @@
-{:deps    {org.clojure/clojure   {:mvn/version "1.10.0"}
-           org.clojure/tools.cli {:mvn/version "0.4.1"}
-           mvxcvi/puget          {:mvn/version "1.0.2"}}
- :aliases {:uberjar {:main-opts  ["-m hf.depstar.uberjar" "bin/cq.jar"]
-                     :extra-deps {seancorfield/depstar {:mvn/version "0.1.5"}}}}}
