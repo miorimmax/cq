@@ -4,7 +4,7 @@
             [clojure.pprint :refer [pprint]]
             [clojure.string :as string]
             [clojure.edn :as edn]
-            [puget.printer :as puget]))
+            [zprint.core :as zprint]))
 
 (def ^:private cli-options
   [["-d" "--default-reader-fn EXPR" "Default reader fn"
@@ -42,12 +42,11 @@
   (System/exit status))
 
 (defn- eval! [expr options]
-  (let [data    (edn/read {:default (:default-reader-fn options)} *in*)
-        expr-fn (or (some->> expr read-string eval)
-                    identity)]
-    (puget/with-options
-      {:print-color (:colors options)}
-      (puget/pprint (expr-fn data)))))
+  (let [data      (edn/read {:default (:default-reader-fn options)} *in*)
+        expr-fn   (or (some->> expr read-string eval)
+                      identity)
+        pprint-fn (if (:colors options) zprint/czprint zprint/zprint)]
+    (pprint-fn (expr-fn data))))
 
 (defn -main [& args]
   (let [{:keys [expr options exit-status exit-message]} (validate-args args)]

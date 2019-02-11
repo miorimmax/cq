@@ -12,6 +12,7 @@
 ### Removed
 * Native image is no longer used because GraalVM [does not support dynamic class loading](https://github.com/oracle/graal/blob/master/substratevm/LIMITATIONS.md#dynamic-class-loading--unloading) and Clojure's `eval` depends on it.
 * toops.deps is no longer used, this is a leiningen project now.
+* Removed puget, using zprint for pretty printing now.
 
 ## [0.2.0] - 2018-10-05
 ### Changed
