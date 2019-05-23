@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [Unreleased]
+## [0.3.0] - 2019-05-23
 ### Changed
 * Command line arguments are parsed with tools.cli now.
 * Exit status defaults to 1 when an exit message is returned on argument validation.
