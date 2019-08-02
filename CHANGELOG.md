@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## [0.3.0] - 2019-05-23
+## [UNRELEASED]
+### Added
+* Added option to load filter expression from a file (`-f` or `--from-file`). It uses Clojure's own parser, so anything the language supports should work. Only caveat is that the last form of the file must be a function that takes one argument: the input.
+
+## [0.3.0]) - 2019-05-23
 ### Changed
 * Command line arguments are parsed with tools.cli now.
 * Exit status defaults to 1 when an exit message is returned on argument validation.

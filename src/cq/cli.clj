@@ -10,6 +10,9 @@
     :default      (fn [tag input] (format "#%s %s" tag input))
     :default-desc "Print tag and input values without further evaluation"
     :parse-fn     load-string]
+   ["-f" "--from-file FILENAME" "Read expr from file"
+    :default      nil
+    :default-desc "Read expression from file rather than from a command line"]
    ["-c" "--colors" "Colorize the output"]
    ["-h" "--help"]])
 
@@ -28,20 +31,23 @@
     (cond
       (:help options) {:exit-message (show-usage summary) :exit-status 0}
       errors          {:exit-message (show-errors errors) :exit-status 1}
-      :else           {:expr (first arguments) :options options})))
+      :else           {:options (assoc options :expr (first arguments))})))
 
 (defn- exit! [status message]
   (println message)
   (System/exit status))
 
-(defn- eval! [expr {:keys [default-reader-fn colors]}]
+(defn- eval! [{:keys [expr from-file default-reader-fn colors]}]
   (let [data      (edn/read {:default default-reader-fn} *in*)
-        expr-fn   (if expr (load-string expr) identity)
+        expr-fn   (cond
+                    from-file (load-file from-file)
+                    expr      (load-string expr)
+                    :else     identity)
         pprint-fn (if colors zprint/czprint zprint/zprint)]
     (pprint-fn (expr-fn data))))
 
 (defn -main [& args]
-  (let [{:keys [expr options exit-status exit-message]} (validate-args args)]
+  (let [{:keys [options exit-status exit-message]} (validate-args args)]
     (if exit-message
       (exit! (or exit-status 1) exit-message)
-      (eval! expr options))))
+      (eval! options))))
