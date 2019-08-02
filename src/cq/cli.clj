@@ -13,6 +13,9 @@
    ["-f" "--from-file FILENAME" "Read expr from file"
     :default      nil
     :default-desc "Read expression from file rather than from a command line"]
+   ["-r" "--data-readers FILENAME" "Data readers file"
+    :default      nil
+    :default-desc "Read data readers from file"]
    ["-c" "--colors" "Colorize the output"]
    ["-h" "--help"]])
 
@@ -37,8 +40,19 @@
   (println message)
   (System/exit status))
 
-(defn- eval! [{:keys [expr from-file default-reader-fn colors]}]
-  (let [data      (edn/read {:default default-reader-fn} *in*)
+(defn- assoc-if [m k v]
+  (if v (assoc m k v) m))
+
+(defn- load-readers! [data-readers]
+  (when data-readers (load-file data-readers)))
+
+(defn- read-data! [default-reader-fn data-readers]
+  (-> {:default default-reader-fn}
+      (assoc-if :readers (load-readers! data-readers))
+      (edn/read *in*)))
+
+(defn- eval! [{:keys [expr from-file default-reader-fn data-readers colors]}]
+  (let [data      (read-data! default-reader-fn data-readers)
         expr-fn   (cond
                     from-file (load-file from-file)
                     expr      (load-string expr)
