@@ -8,20 +8,30 @@
 
 Clone this repository and run `lein bin` to build a binary.
 
-Then, copy the resulting binary a location in your `$PATH`.
+Then, copy the resulting binary a location in your `$PATH`, for example:
+
+```bash
+lein bin
+cp target/cq /usr/local/bin/cq
+```
 
 ## Usage
 
 ### Querying values
 
+You can provide a Clojure function:
 ```bash
-# You can provide a function and it will be applied to the entire EDN, printing its output in the end
-cq '#(-> % :deep :nested :key)' < file.edn
+cq '(fn [data] (get-in data [:some :deep :nested :key]))' file.edn
 ```
 
+You can get a single key from the map (which is just another Clojure function):
 ```bash
-# If you just want a single key, you can also use the :keyword form and it works just like Clojure
-cq ':a-key' < file.edn
+cq ':a-key' file.edn
+```
+
+You can also put your filter function in a file, using `--from-file` (or `-f`, for short):
+```bash
+cq -f very-complex.clj file.edn
 ```
 
 ### Providing a custom default data reader
@@ -29,5 +39,15 @@ cq ':a-key' < file.edn
 You can provide a custom default data reader with the `--default-reader-fn` (or `-d`, for short) option. For example:
 
 ```bash
-cq --default-reader-fn '(fn [tag input] (format "Custom reader: tag %s, input %s" tag input))'
+cq -d '(fn [tag input] (format "Custom reader: tag %s, input %s" tag input))'
+```
+
+### Providing custom data readers
+
+You can also provide data readers for specific tags, like your own reader for `#inst`, for example.
+
+To do so, create a `data_readers.clj` file and and use the `--data-readers` option (or `-r`, for short):
+
+```bash
+cq -r data_readers.clj identity file.edn
 ```

@@ -7,5 +7,6 @@
   :profiles {:uberjar {:aot :all}
              :dev     {:plugins [[lein-binplus "0.6.4"]
                                  [lein-cljfmt "0.6.4"]]}}
-  :bin {:bootclasspath true}
+  :bin {:name          "cq"
+        :bootclasspath true}
   :cljfmt {:indents {assoc-if [[:inner 0]]}})
