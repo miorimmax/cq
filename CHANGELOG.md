@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [UNRELEASED]
+## [0.4.0] - 2019-08-03
 ### Added
 * Added option to load filter expression from a file (`-f` or `--from-file`). It uses Clojure's own parser, so anything the language supports should work. Only caveat is that the last form of the file must be a function that takes one argument: the input.
 * Added option to load data readers from a file. The file format is the same as the one Clojure uses for [`*data-readers*`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/%2Adata-readers%2A).

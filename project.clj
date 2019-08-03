@@ -1,4 +1,4 @@
-(defproject cq "0.4.0-SNAPSHOT"
+(defproject cq "0.4.0"
   :description "Command line tool to interact with EDN data/files"
   :main cq.cli
   :dependencies [[org.clojure/clojure "1.10.1"]
