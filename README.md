@@ -4,6 +4,12 @@
 
 ## Developing
 
+### Testing
+
+Tests are written with a combination of [`clojure.test`](https://clojure.github.io/clojure/clojure.test-api.html), [`matcher-combinators`](https://github.com/nubank/matcher-combinators) and [`mockfn`](https://github.com/pmatiello/mockfn).
+
+[`kaocha`](https://github.com/lambdaisland/kaocha) is set up to be used as the test runner, you can invoke it with `lein kaocha` or just `lein test` to run tests.
+
 ### Building
 
 Clone this repository and run `lein bin` to build a binary.
