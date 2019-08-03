@@ -5,6 +5,7 @@
                  [org.clojure/tools.cli "0.4.2"]
                  [zprint "0.4.16"]]
   :profiles {:uberjar {:aot :all}
+             :kaocha  {:dependencies [[lambdaisland/kaocha "0.0-529"]]}
              :dev     {:dependencies [[mockfn "0.4.0"]
                                       [nubank/matcher-combinators "1.0.1"]]
                        :plugins      [[lein-binplus "0.6.4"]
@@ -13,4 +14,5 @@
         :bootclasspath true}
   :cljfmt {:indents {assoc-if  [[:inner 0]]
                      providing [[:block 0]]
-                     verifying [[:block 0]]}})
+                     verifying [[:block 0]]}}
+  :aliases {"kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]})
