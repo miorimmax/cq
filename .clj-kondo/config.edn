@@ -1,0 +1,2 @@
+{:linters {:unused-namespace {:exclude [matcher-combinators.clj-test]}}
+ :lint-as {mockfn.clj-test/deftest clojure.test/deftest}}
