@@ -1,0 +1,6 @@
+language: clojure
+dist: xenial
+script: lein kaocha
+jdk:
+  - openjdk8
+  - openjdk11
