@@ -7,10 +7,11 @@
                  [zprint "0.4.16"]]
   :profiles {:uberjar {:aot :all}
              :kaocha  {:dependencies [[lambdaisland/kaocha "0.0-529"]]}
-             :dev     {:dependencies [[mockfn "0.4.0" :exclusions [midje]]
-                                      [nubank/matcher-combinators "1.0.1" :exclusions [midje]]]
-                       :plugins      [[lein-binplus "0.6.5"]
-                                      [lein-cljfmt "0.6.4"]]}}
+             :dev     {:dependencies        [[mockfn "0.4.0" :exclusions [midje]]
+                                             [nubank/matcher-combinators "1.0.1" :exclusions [midje]]]
+                       :plugins             [[lein-binplus "0.6.5"]
+                                             [lein-cljfmt "0.6.4"]]
+                       :plugin-repositories [["clojure-releases" {:url "https://build.clojure.org/releases/"}]]}}
   :bin {:name          "cq"
         :bootclasspath true}
   :cljfmt {:indents {assoc-if  [[:inner 0]]
