@@ -1,8 +1,12 @@
 language: clojure
 dist: xenial
-script: lein kaocha
 jdk:
   - openjdk8
   - openjdk11
 cache:
-  directories: $HOME/.m2
+  directories:
+    - .clj-kondo/.cache
+    - $HOME/.m2
+script:
+  - lein clj-kondo
+  - lein kaocha

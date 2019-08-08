@@ -9,7 +9,8 @@
   :profiles {:uberjar {:aot :all}
              :kaocha  {:dependencies [[lambdaisland/kaocha "0.0-529"]]}
              :dev     {:dependencies [[mockfn "0.4.0" :exclusions [midje]]
-                                      [nubank/matcher-combinators "1.0.1" :exclusions [midje]]]
+                                      [nubank/matcher-combinators "1.0.1" :exclusions [midje]]
+                                      [clj-kondo "2019.07.31-alpha"]]
                        :plugins      [[lein-binplus "0.6.5"]
                                       [lein-cljfmt "0.6.4"]]
                        :mirrors      [["clojure-releases" {:name "sonatype" :url "https://oss.sonatype.org/content/groups/public/"}]]}}
@@ -18,4 +19,5 @@
   :cljfmt {:indents {assoc-if  [[:inner 0]]
                      providing [[:block 0]]
                      verifying [[:block 0]]}}
-  :aliases {"kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]})
+  :aliases {"kaocha"    ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]
+            "clj-kondo" ["run" "-m" "clj-kondo.main" "--lint" "src" "--config" ".clj-kondo/config.edn" "--cache"]})
