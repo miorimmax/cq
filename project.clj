@@ -5,6 +5,8 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/tools.cli "0.4.2"]
                  [zprint "0.4.16"]]
+  :mirrors [["central" {:url "https://maven-central.storage-download.googleapis.com/"}]
+            ["central" {:url "https://jcenter.bintray.com"}]]
   :profiles {:uberjar {:aot :all}
              :kaocha  {:dependencies [[lambdaisland/kaocha "0.0-529"]]}
              :dev     {:dependencies        [[mockfn "0.4.0" :exclusions [midje]]
