@@ -13,8 +13,7 @@
                                       [clj-kondo "2020.03.20"]]
                        :plugins      [[lein-binplus "0.6.5"]
                                       [lein-cljfmt "0.6.4"]]}}
-  :bin {:name          "cq"
-        :bootclasspath true}
+  :bin {:name "cq"}
   :cljfmt {:indents {assoc-if  [[:inner 0]]
                      providing [[:block 0]]
                      verifying [[:block 0]]}}
