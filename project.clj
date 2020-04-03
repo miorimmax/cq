@@ -1,4 +1,4 @@
-(defproject cq "0.4.0"
+(defproject cq "0.4.1"
   :description "Command line tool to interact with EDN data/files"
   :main cq.cli
   :exclusions [org.clojure/clojure]

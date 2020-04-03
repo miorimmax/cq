@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## [0.4.1] - 2020-04-03
+### Changed
+* Fixed an issue with the class loader of the binary produced, so it can work again.
+* Updated dependencies to their latest version.
+
 ## [0.4.0] - 2019-08-03
 ### Added
 * Added option to load filter expression from a file (`-f` or `--from-file`). It uses Clojure's own parser, so anything the language supports should work. Only caveat is that the last form of the file must be a function that takes one argument: the input.
