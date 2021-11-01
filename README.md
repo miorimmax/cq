@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/miorimmax/cq.svg?branch=master)](https://travis-ci.org/miorimmax/cq)
 
+> ⚠️ **NOTE**: `cq` is not under active development. Consider using the excellent [`babashka`](https://github.com/babashka/babashka) instead. ⚠️
+
 `cq` provides similar functionality that `jq` does for JSON: allowing one to interact with EDN files by performing queries and manipulating input/output as necessary using Clojure's syntax.
 
 ## Developing
